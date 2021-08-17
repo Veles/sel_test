@@ -1,0 +1,6 @@
+- name: ensure haproxy enabled and started
+  become: yes
+  systemd:
+    name: haproxy
+    state: started
+    enabled: yes

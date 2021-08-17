@@ -1,0 +1,6 @@
+---
+- hosts: loader
+  gather_facts: yes
+
+  roles:
+    - loader

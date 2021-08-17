@@ -1,0 +1,10 @@
+[rabbitmq]
+rabbit01      ansible_host=192.168.88.101
+rabbit02      ansible_host=192.168.88.102
+rabbit03      ansible_host=192.168.88.103
+
+[haproxy]
+haproxy01       ansible_host=192.168.88.100
+
+[loader]
+loader01        ansible_host=192.168.88.104

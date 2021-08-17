@@ -1,0 +1,17 @@
+- name: add key gpg
+  become: yes
+  apt_key:
+    url: "{{ item }}"
+    state: present
+  tags: [ 'install' ]
+  with_items: "{{ apt_key }}"
+
+- name: add repository
+  become: yes
+  apt_repository:
+    repo: "{{ item.repo }}"
+    state: present
+    update_cache: true
+    filename: "{{ item.file }}"
+  tags: [ 'install' ]
+  with_items: "{{ apt_repo }}"

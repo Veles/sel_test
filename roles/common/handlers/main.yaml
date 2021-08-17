@@ -1,0 +1,11 @@
+---
+- name: apt update
+  apt:
+     update_cache: yes
+
+- name: restart systemd-timesyncd
+  become: yes
+  systemd:
+    name: systemd-timesyncd
+    state: restarted
+    enabled: yes

@@ -1,0 +1,71 @@
+- name: get version
+  become: yes
+  shell: "rabbitmqctl version"
+  register: rabbitmq_version
+  when: rabbitmq_plugins_need_download
+  tags: [ 'install' ]
+
+- name: ensure plugins conf
+  become: yes
+  file:
+    path: "{{ rabbitmq_plugins_dir }}"
+    state: directory
+    recurse: yes
+  when: rabbitmq_plugins_need_download
+  tags: [ 'install' ]
+
+- name: debug version
+  debug: msg="{{ rabbitmq_version }}"
+  tags: [ 'install' ]
+
+- name: Add plugins
+  register: copy_var
+  become: yes
+  get_url:
+    url: "{{ item }}"
+    # method: GET
+    dest: "{{ rabbitmq_plugins_dir }}/{{ item | basename }}"
+    mode: "0644"
+    owner: root
+    group: root
+    force: yes
+  with_items: "{{ rabbitmq_plugins_download }}"
+  when: 
+    - rabbitmq_plugins_need_download
+    - rabbitmq_version.stdout is defined
+  tags: [ 'install' ]
+
+- name: Enable the plugins
+  become: yes
+  rabbitmq_plugin:
+    names: "{{ rabbitmq_plugins_enabled | join(',') }}"
+    state: enabled
+  tags: [ 'install' ]
+  when: 
+    - rabbitmq_plugins_enabled is defined
+    - rabbitmq_plugins_enabled|length > 0
+
+- name: Disable the plugins
+  become: yes
+  rabbitmq_plugin:
+    names: "{{ rabbitmq_plugins_disabled | join(',') }}"
+    state: disabled
+  tags: [ 'install' ]
+  when: 
+    - rabbitmq_plugins_disabled is defined
+    - rabbitmq_plugins_disabled|length > 0
+
+- name: RabbitMQ add user
+  become: yes
+  rabbitmq_user:
+    user: "{{ rabbitmq_user }}"
+    password: "{{ rabbitmq_password }}"
+    vhost: "/"
+    configure_priv: ".*"
+    read_priv: ".*"
+    write_priv: ".*"
+    tags: "administrator"
+    state: present
+  tags: [ 'install' ]
+
+  

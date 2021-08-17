@@ -1,0 +1,6 @@
+---
+- hosts: haproxy
+  gather_facts: yes
+
+  roles:
+    - haproxy

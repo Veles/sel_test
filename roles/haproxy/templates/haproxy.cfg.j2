@@ -1,0 +1,19 @@
+global
+  log 127.0.0.1 local0 notice
+  maxconn 10000
+  user haproxy
+  group haproxy
+defaults
+  timeout connect 5s
+  timeout client 100s
+  timeout server 100s
+listen rabbitmq
+  bind :5673
+  mode tcp
+  balance roundrobin
+  {% for haproxy_srv in groups['rabbitmq'] %}
+  server  {{ hostvars[haproxy_srv]['inventory_hostname'] }}  {{ hostvars[haproxy_srv]['ansible_host'] }}:5672 check inter 5s rise 2 fall 3
+  {% endfor %}
+
+  
+

@@ -1,0 +1,21 @@
+- name: install required packages
+  become: yes
+  apt:
+    name: "{{ packages }}"
+    state: "{{ rabbitmq_apt_state | default('present') }}"
+    update_cache: yes
+  tags: [ 'install' ]
+  notify: restart rabbitmq-server
+
+
+- name: install required packages step 2
+  become: yes
+  apt:
+    name: "{{ packages_2 }}"
+    state: "{{ rabbitmq_apt_state | default('present') }}"
+  tags: [ 'install' ]
+  notify: restart rabbitmq-server
+
+- name: run hanlders if need
+  meta: flush_handlers
+

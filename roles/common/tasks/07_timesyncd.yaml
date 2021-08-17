@@ -1,0 +1,18 @@
+- name: configure systemd-timesyncd
+  become: yes
+  template:
+    src: "timesyncd.conf.j2"
+    dest: "/etc/systemd/timesyncd.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart systemd-timesyncd
+
+
+- name: enable systemd-timesyncd service
+  become: yes
+  systemd:
+    name: systemd-timesyncd
+    state: started
+    enabled: yes
+  

@@ -1,0 +1,52 @@
+- name: ensure group "{{ admins_group }}" exists
+  become: yes
+  group:
+    name: "{{ admins_group }}"
+    state: present
+    
+- name: setup users
+  become: yes
+  user:
+    name: "{{ item.username }}"
+    state: "{{ item.state | default('present') }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    password: "{{ item.password }}"
+    group: "{{ admins_group }}"
+    remove: yes
+  when: item.username is defined
+  with_items:
+    - "{{ admins_group_list }}"
+
+- name: add ssh-keys
+  become: yes
+  authorized_key:
+    user: "{{ item.0.username }}"
+    key: "{{ item.1 }}"
+  with_subelements:
+    - "{{ admins_group_list }}"
+    - keys.active
+    - flags:
+      skip_missing: True
+  when: item.0.state != "absent"
+
+- name: remove absolete ssh-keys
+  become: yes
+  authorized_key:
+    user: "{{ item.0.username }}"
+    key: "{{ item.1 }}"
+    state: absent
+  with_subelements:
+    - "{{ admins_group_list }}"
+    - keys.disabled
+    - flags:
+      skip_missing: True
+  when: item.0.state != "absent"
+
+- name: sudoers configuration
+  become: yes
+  lineinfile:
+    dest: "/etc/sudoers"
+    regexp: "^%{{ admins_group }}"
+    line: "%{{ admins_group }} ALL=(ALL:ALL) NOPASSWD:ALL"
+    validate: visudo -cf %s
+  ignore_errors: true

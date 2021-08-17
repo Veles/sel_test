@@ -1,0 +1,20 @@
+# emacs tilda-files & sharp files
+*~
+\#*#
+
+# vim swap files
+*.swp
+
+# osx finder directory structure files
+.DS_Store
+
+# IDEA
+.idea
+*.iml
+target
+
+# Log file
+*.log
+
+# ansible recap files
+*.retry

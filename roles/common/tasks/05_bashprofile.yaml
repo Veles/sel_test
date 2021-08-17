@@ -1,0 +1,17 @@
+- name: bash profile
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: /etc/profile.d/
+    owner: root
+    mode: 644
+    #force: yes
+  with_fileglob: files/profile.d/*
+
+- name: inputrc
+  become: yes
+  copy:
+    src: "inputrc"
+    dest: /etc/inputrc
+    owner: root
+    mode: 644

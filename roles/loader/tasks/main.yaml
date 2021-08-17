@@ -1,0 +1,14 @@
+---
+- name: Install pika  python package
+  pip:
+    name: pika 
+
+- name: copy app
+  template:
+    src: loader.py.j2
+    dest: /tmp/loader.py
+    mode: 0644
+
+- name: run app
+  shell:  python3 /tmp/loader.py
+  

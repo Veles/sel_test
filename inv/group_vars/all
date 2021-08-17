@@ -1,0 +1,32 @@
+# name servers
+nameserver1: 192.168.88.200
+nameserver2: 192.168.88.200
+
+# ntp servers
+ntpserver: ru.pool.ntp.org
+
+# apt
+apt_mirror: "mirror.yandex.ru"
+dist: "debian"
+root_passwd_hash: "$6$WAAlUBdRrHPEr.L7$acbwPancIVvwCDbHZBb2pmhGCf71IW.tlKB/VbFMbDTl8EXo5c443NDcKpiBeKLPLg8aBP54PjS4swE1LrDe30"
+
+# ansible user settings
+ansible_python_interpreter: /usr/bin/python3
+ansible_user: ansible
+ansible_user_password_hash: "$6$WAAlUBdRrHPEr.L7$acbwPancIVvwCDbHZBb2pmhGCf71IW.tlKB/VbFMbDTl8EXo5c443NDcKpiBeKLPLg8aBP54PjS4swE1LrDe30"
+ansible_user_public_ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDhkvuYKtoqF0Y2rZciGnw/ylWwOqKlrA+5EPENYGZyzFwZUOAElI2+ez0ETh/mIr9+Nx5wu9fC3ngeJd7tnCyve8bvdd51g662KyH3T6bdIpriacOnWfRhxgNxwUmMeHBclcnGJLBTGk5hYgRJDBQIOFTDeRnHmHke3zSz3hT8aHamzujaiWFuW63gBYHZv2fHwDwCQix0ErucJXv/7dYJHXsM1fYy8le7h59QVwHFDRJvPN3y4fQ3vONTTWAuwfz60HwABXfstHrsFxtNQ7HwVj6DjQA+caxaUs8cPYFm8K/tfVJYDo9YDmHhXSoJ19fm4hEmHP/VvsE8eX4Oxoe4umldA7AeMpHJt1OMawc8zy1OGndK5uUbgxwfDLFm/aDLXt8sKB5Q8hnDNMQJsRja+GrX9ELmWEoR5npLmZ96Z0gcbdWSOegN9a5ktrADyGjSpzasYDnJywRH0FGFidMdgTQF+R9IPgG1D+dxueCqBRXyIZ+vlgHLUyI3rW3UtOTX+VCkz497uSlACQaM4BD1guXsaKNOUahULuLDr4KGrf8Mo3aZ+ks+EhpRC46jRmLKody/VOADLys8WpHCGheeGZfwA8LY6ScxzMF7a6zAX5gB5BuDleyBtzaZd5MDOBJLjc2s6/qpGK3msimicsPp9Ll0dLQHeRA1v0itJvE7Hw== ansible"
+ansible_uid: 1100
+ansible_gid: 1100
+admins_group: "admins"
+admins_group_list:
+  - name: "derunih"
+    username: "derunih"
+    keys:
+      active:
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCZ8FPBcsh8QeErjKOsyGACOOyYMHzQpIGLp4NCZz+q2NS1X19M+fDrpBYHKEWAIEMVTaMPqV+iOWp9pamjVEo4xf5Bb7lMeyyFWss6OEwCvQMZrODKE5xCagHaBNTRjgo3cdfrQbX57VecYesLwr/9HVWID0fDcGKduzcSOjoxnlAtMcf5Vgn7hOHTUkZRJr1jJSSSjCYPXcB960xcsJXEIgmNuCEd+JZC8PdoepdfE5AXOKxQA1MnJcW5ezs20rZ9gPVHV1iktFlncAfwax5Qyz9mW+TYZqoCwZYqgBU0Hj1WIhlWsHJXzZo+ZyA7JVLBrlErQn7IKH4mcJbpa1eQ6KJcT7+thYXzO9XtE9TVZIQIvcH4hSxACWOpdwLpuZSjQ58FG7pc/Mr1Hhnh4NqqkzBmWLEx+tDooj1MW/k9u7cdLC3htTImEsfCFEYAS0KZkWqPzZ+WKMBMi4DE8e2SQo2+7uS6uEnBvMHiwo0vuW2ZHrf62O2Z2tK1COdUnnoUN9onlgzXzfpjONqa9anBb3Tdm3rTbaCRfISNLJQstMcYuMsz+pfEBdjGGpavVrYCK3bgsr4H4vytcuFR0iT3+ksGEk16BKQ/b8zgnKWWH3hYz38236tMqoyCrpqxx/NXgeTc8VnOTjTBnvwD2uPOF1UPiJfCQWlIO6gRJTfV2w== derunih"
+    shell: "/bin/bash"
+    password: "$6$WAAlUBdRrHPEr.L7$acbwPancIVvwCDbHZBb2pmhGCf71IW.tlKB/VbFMbDTl8EXo5c443NDcKpiBeKLPLg8aBP54PjS4swE1LrDe30"
+    state: present
+
+rabbitmq_user: "admin"
+rabbitmq_password: "admin"

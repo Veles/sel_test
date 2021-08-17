@@ -1,0 +1,11 @@
+---
+galaxy_info:
+  author: derunix@ya.ru
+  description: sshd strict configuration  
+  license: Apache Commons 2.0
+  min_ansible_version: 2.7
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+  dependencies: []

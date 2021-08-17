@@ -1,0 +1,13 @@
+- name: ensure haproxy is installed
+  become: yes
+  apt:
+    name: haproxy
+    state: present
+
+- name: ensure required packages are installed
+  become: yes
+  yum:
+    name:
+      - ca-certificates
+    state: present
+

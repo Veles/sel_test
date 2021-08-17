@@ -1,0 +1,4 @@
+rabbitmq_leader: "rabbit01"
+rabbitmq_partition_handling: "autoheal"
+rabbitmq_plugins_enabled:
+  - rabbitmq_management

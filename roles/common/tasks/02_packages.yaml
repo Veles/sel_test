@@ -1,0 +1,38 @@
+- name: install required packages
+  become: yes
+  apt:
+    name:
+      - htop
+      - traceroute
+      - telnet
+      - net-tools
+      - dnsutils
+      - ncdu
+      - psmisc
+      - wget
+      - bash-completion
+      - mc
+      - vim-nox
+      - unzip
+      - gnupg2
+      - parted
+      - strace
+      - ca-certificates
+      - curl
+      - python3-pip
+    state: present
+    update_cache: yes
+
+- name: remove unused packages
+  become: yes
+  apt:
+    name:
+      - ntp
+    state: absent
+
+- name: install open-vm-tools
+  become: yes
+  apt:
+    name: open-vm-tools
+    state: latest
+  when: ansible_virtualization_role == "guest" and ansible_virtualization_type == "VMware"    

@@ -1,0 +1,4 @@
+---
+- include: 01packages.yaml
+- include: 02haproxy.yaml
+- include: 03services.yaml

@@ -1,0 +1,73 @@
+---
+rabbitmq_user: "admin"
+rabbitmq_password: "admin"
+
+rabbitmq_permission_vhost: []
+rabbitmq_vhosts: ["/"]
+
+rabbitmq_vhosts_additional: []
+rabbitmq_permission_vhost: [ { vhost: "/", configure_priv: ".*", read_priv: ".*", write_priv: ".*" } ]
+
+
+erlang_apt_prop:
+  channel: "erlang"
+
+rabbitmq_apt_prop:
+  channel: "rabbitmq-server"
+
+rabbitmq_plugins_enabled: ["rabbitmq_management"]
+
+rabbitmq_plugins_dir: "/usr/lib/rabbitmq/lib/rabbitmq_server-{{ rabbitmq_version.stdout }}/plugins"
+
+rabbitmq_plugins_need_download: false 
+
+rabbitmq_plugins_download:
+  - "https://github.com/rabbitmq/rabbitmq-message-timestamp/releases/download/v3.8.0/rabbitmq_message_timestamp-3.8.0.ez"
+
+
+apt_key:
+  - "https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc"
+  - "https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey"
+  - "https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/gpg.E495BB49CC4BBE5B.key"
+  
+apt_file_disable: 
+  - "bintray.erlang"
+  - "bintray.rabbitmq"
+
+apt_file: "rabbitmq"
+
+
+apt_repo:
+  - repo: "deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main"
+    file: "{{ apt_file }}"
+  - repo: "deb https://packagecloud.io/rabbitmq/rabbitmq-server/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} main"
+    file: "{{ apt_file }}"
+
+
+
+#pkg_vers:
+
+packages:
+  - erlang-base
+  - erlang-asn1
+  - erlang-crypto
+  - erlang-eldap
+  - erlang-ftp
+  - erlang-inets
+  - erlang-mnesia
+  - erlang-os-mon
+  - erlang-parsetools
+  - erlang-public-key
+  - erlang-runtime-tools
+  - erlang-snmp
+  - erlang-ssl
+  - erlang-syntax-tools
+  - erlang-tftp
+  - erlang-tools
+  - erlang-xmerl
+
+packages_2:
+  - rabbitmq-server
+
+services:
+  - rabbitmq-server

@@ -1,0 +1,11 @@
+---
+- include: 01_sourceslist.yaml
+- include: 02_packages.yaml
+- include: 03_hostname.yaml
+- include: 04_resolvconf.yaml
+- include: 05_bashprofile.yaml
+- include: 06_ansible_user.yaml
+- include: 07_timesyncd.yaml
+- include: 08_locale.yaml
+- include: 09_network.yaml
+- include: 10_inventory_to_hosts.yaml

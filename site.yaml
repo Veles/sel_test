@@ -1,0 +1,25 @@
+---
+- hosts: all
+  gather_facts: yes
+
+  roles:
+    - common
+    - opensshd
+
+- hosts: rabbitmq
+  gather_facts: yes
+
+  roles:
+    - rabbitmq
+
+- hosts: haproxy
+  gather_facts: yes
+
+  roles:
+    - haproxy
+
+- hosts: loader
+  gather_facts: yes
+
+  roles:
+    - loader

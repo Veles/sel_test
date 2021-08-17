@@ -1,0 +1,9 @@
+- name: Disable cloud-init confguration network
+  become: yes
+  copy:
+    content: "network: {config: disabled}"
+    dest: "/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg"
+    owner: root
+    group: root
+  when:
+    - common_cloud_init_network_configuration_disable

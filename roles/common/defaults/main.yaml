@@ -1,0 +1,3 @@
+apt_update_enabled: False
+
+common_cloud_init_network_configuration_disable: false

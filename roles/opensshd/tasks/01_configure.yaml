@@ -1,0 +1,22 @@
+---
+- name: copy sshd_config
+  become: yes
+  template:
+    src: "sshd_config.j2"
+    dest: "/etc/ssh/sshd_config"
+    owner: root
+    mode: 0644
+  register: sshd_configured
+
+- name: restart ssh server
+  become: yes
+  systemd:
+    name: sshd
+    state: restarted
+  register: sshd_restarted
+  when: sshd_configured['changed']
+
+- name: wait for {{ inventory_hostname }} to become reachable
+  wait_for_connection:
+    timeout: 10
+  when: sshd_restarted['changed']

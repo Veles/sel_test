@@ -1,0 +1,5 @@
+- name: Ensure the locale ru_RU.UTF-8 exists
+  become: yes
+  locale_gen:
+    name: ru_RU.UTF-8
+    state: present

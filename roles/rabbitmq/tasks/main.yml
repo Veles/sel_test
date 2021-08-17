@@ -1,0 +1,6 @@
+---
+- include: 01_repo.yml
+- include: 02_packages.yml
+- include: 03_rabbitmq.yml
+- include: 04_services.yml
+- include: 05_cluster.yml

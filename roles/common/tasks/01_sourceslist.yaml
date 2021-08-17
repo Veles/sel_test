@@ -1,0 +1,25 @@
+- name: lsb_release install
+  become: yes
+  apt:
+    name: lsb-release
+    state: present
+
+#- name: reread ansible_lsb facts
+#  become: yes
+#  setup:
+#    filter: ansible_lsb*
+
+- name: configure sources.list
+  become: yes
+  template:
+    src: sources.{{ dist }}.list.j2
+    dest: /etc/apt/sources.list
+#  notify: apt update
+
+- name: update cache
+  become: yes
+  apt:
+    update_cache: yes
+  when:
+    - apt_update_enabled is defined
+    - apt_update_enabled|bool == True
